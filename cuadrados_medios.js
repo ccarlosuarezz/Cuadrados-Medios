@@ -1,4 +1,4 @@
-const semilla = document.getElementById('input_semilla');
+const semilla = document.getElementById('input_seed');
 const button = document.getElementById('button');
 const MIN_SEED_LENGTH = 4;
 
