@@ -7,24 +7,28 @@ button.addEventListener("click", newPseudoRandomList);
 
 function newPseudoRandomList() {
     let seed = semilla.value;
-    const seedLength = `${seed}`.length;
-    if (seedLength >= MIN_SEED_LENGTH)  {
+    const SEED_LENGTH = `${seed}`.length;
+    if (SEED_LENGTH >= MIN_SEED_LENGTH)  {
         randomList.innerHTML = '';
         let seedReference = seed;
         let period_list = [];
         let i = 1;
-        while (`${seedReference}`.length >= MIN_SEED_LENGTH && i <= 1000) {
-            let meanSquares = getMeanSquares(seedReference, seedLength);
+        while (`${seedReference*seedReference}`.length >= SEED_LENGTH) {
+            let meanSquares = getMeanSquares(seedReference, SEED_LENGTH);
             if (period_list.length !== 0) {
                 if (period_list.includes(meanSquares)) {
                     break;
                 }
             }
-            period_list.push(meanSquares);
-            let newRandom = meanSquares / Math.pow(10, seedLength);
-            showNewRandom(i+' - '+newRandom);
-            seedReference = parseInt(meanSquares);
-            i++;
+            if (parseInt(meanSquares) !== 0) {
+                period_list.push(meanSquares);
+                let newRandom = meanSquares / Math.pow(10, SEED_LENGTH);
+                showNewRandom(i+' - '+newRandom);
+                seedReference = parseInt(meanSquares);
+                i++;
+            } else {
+                break;
+            }
         }
     } else {
         window.alert('El numero ingresado tiene menos de 4 digitos');
@@ -37,9 +41,12 @@ function showNewRandom(newRandom) {
     randomList.appendChild(result);
 }
 
-function getMeanSquares(seed, seedLength) {
+function getMeanSquares(seed, SEED_LENGTH) {
     let squaredSeed = seed * seed;
+    if (`${squaredSeed}`.length % 2 != 0) {
+        squaredSeed = '0'+squaredSeed;
+    }
     let squaredSeedLength = `${squaredSeed}`.length;
-    let division = Math.round(squaredSeedLength/4);
-    return `${squaredSeed}`.substr(division, seedLength);
+    let division = Math.floor(squaredSeedLength/4);
+    return `${squaredSeed}`.substr(division, SEED_LENGTH);
 }
