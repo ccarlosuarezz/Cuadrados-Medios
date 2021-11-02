@@ -11,14 +11,21 @@ function newPseudoRandomList() {
     if (seedLength >= MIN_SEED_LENGTH)  {
         randomList.innerHTML = '';
         let seedReference = seed;
+        let period_list = [];
         let i = 1;
-        do {
+        while (`${seedReference}`.length >= MIN_SEED_LENGTH && i <= 1000) {
             let meanSquares = getMeanSquares(seedReference, seedLength);
+            if (period_list.length !== 0) {
+                if (period_list.includes(meanSquares)) {
+                    break;
+                }
+            }
+            period_list.push(meanSquares);
             let newRandom = meanSquares / Math.pow(10, seedLength);
             showNewRandom(i+' - '+newRandom);
             seedReference = parseInt(meanSquares);
             i++;
-        } while (`${seedReference}`.length >= MIN_SEED_LENGTH && i <= 10000);
+        }
     } else {
         window.alert('El numero ingresado tiene menos de 4 digitos');
     }
