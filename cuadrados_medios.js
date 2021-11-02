@@ -1,23 +1,33 @@
 const semilla = document.getElementById('input_seed');
 const button = document.getElementById('button');
+const randomList = document.getElementById('random_list');
 const MIN_SEED_LENGTH = 4;
 
-button.addEventListener("click", generate);
+button.addEventListener("click", newPseudoRandomList);
 
-function generate() {
-    const result = document.createElement('p');
-    result.textContent = newRandomNumber(semilla.value);
-    document.body.appendChild(result);
-}
-
-function newRandomNumber(seed) {
+function newPseudoRandomList() {
+    let seed = semilla.value;
     const seedLength = `${seed}`.length;
     if (seedLength >= MIN_SEED_LENGTH)  {
-        let meanSquares = getMeanSquares(seed, seedLength);
-        return meanSquares / Math.pow(10, seedLength);
+        randomList.innerHTML = '';
+        let seedReference = seed;
+        let i = 1;
+        do {
+            let meanSquares = getMeanSquares(seedReference, seedLength);
+            let newRandom = meanSquares / Math.pow(10, seedLength);
+            showNewRandom(i+' - '+newRandom);
+            seedReference = parseInt(meanSquares);
+            i++;
+        } while (`${seedReference}`.length >= MIN_SEED_LENGTH && i <= 10000);
     } else {
         window.alert('El numero ingresado tiene menos de 4 digitos');
     }
+}
+
+function showNewRandom(newRandom) {
+    const result = document.createElement('p');
+    result.textContent = newRandom;
+    randomList.appendChild(result);
 }
 
 function getMeanSquares(seed, seedLength) {
