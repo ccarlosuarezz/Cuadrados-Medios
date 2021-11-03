@@ -90,9 +90,10 @@ body {
 }
 
 .table_container {
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
     margin-top: 20px;
+    border-bottom:solid black 1px;
 }
 
 table{
@@ -107,6 +108,7 @@ table{
 
 th, td{
     border-left:solid black 1px;
+    border-bottom:solid black 1px;
     padding: 8px;
     text-align: center;
 }

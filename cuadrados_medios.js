@@ -23,7 +23,7 @@ function newPseudoRandomList() {
             if (parseInt(meanSquares) !== 0) {
                 period_list.push(meanSquares);
                 let newRandom = meanSquares / Math.pow(10, SEED_LENGTH);
-                showNewRandom(i+' - '+newRandom);
+                showNewRandom(i, newRandom);
                 seedReference = parseInt(meanSquares);
                 i++;
             } else {
@@ -35,10 +35,15 @@ function newPseudoRandomList() {
     }
 }
 
-function showNewRandom(newRandom) {
-    const result = document.createElement('p');
-    result.textContent = newRandom;
-    randomList.appendChild(result);
+function showNewRandom(consecutive, newRandom) {
+    const newRow = document.createElement('tr');
+    const consec = document.createElement('td');
+    const newRand = document.createElement('td');
+    consec.textContent = consecutive;
+    newRand.textContent = newRandom;
+    newRow.appendChild(consec);
+    newRow.appendChild(newRand);
+    randomList.appendChild(newRow);
 }
 
 function getMeanSquares(seed, SEED_LENGTH) {
