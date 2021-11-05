@@ -99,7 +99,7 @@ body {
 table{
     border-collapse:separate;
     border-spacing: 0;
-    width: 300px;
+    width: 500px;
     text-align: left;
     border:solid black 1px;
     border-radius:6px;
@@ -117,9 +117,13 @@ td:first-child, th:first-child {
     border-left: none;
 }
 
-thead{
+thead {
     background-color: var(--dark-green);
     border-top: none;
     color: white;
 }
 
+.quantity {
+    font-size: 18px;
+    color: var(--dark-gray);
+}

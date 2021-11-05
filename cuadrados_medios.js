@@ -1,6 +1,7 @@
 const semilla = document.getElementById('input_seed');
 const button = document.getElementById('button');
 const randomList = document.getElementById('random_list');
+const quantity = document.getElementById('quantity');
 const MIN_SEED_LENGTH = 4;
 
 button.addEventListener("click", newPseudoRandomList);
@@ -12,7 +13,7 @@ function newPseudoRandomList() {
         randomList.innerHTML = '';
         let seedReference = seed;
         let period_list = [];
-        let i = 1;
+        let i = 0;
         while (`${seedReference*seedReference}`.length >= SEED_LENGTH) {
             let meanSquares = getMeanSquares(seedReference, SEED_LENGTH);
             if (period_list.length !== 0) {
@@ -23,25 +24,35 @@ function newPseudoRandomList() {
             if (parseInt(meanSquares) !== 0) {
                 period_list.push(meanSquares);
                 let newRandom = meanSquares / Math.pow(10, SEED_LENGTH);
-                showNewRandom(i, newRandom);
+                showNewRandom(i, seedReference, meanSquares, newRandom);
                 seedReference = parseInt(meanSquares);
                 i++;
             } else {
                 break;
             }
         }
+        quantity.innerHTML = '<strong>Pseudoaleatorios generados: ' + i + '</strong>';
     } else {
         window.alert('El numero ingresado tiene menos de 4 digitos');
     }
 }
 
-function showNewRandom(consecutive, newRandom) {
+function showNewRandom(consecutive, seedReference, meanSquare, newRandom) {
     const newRow = document.createElement('tr');
     const consec = document.createElement('td');
+    const actualSeed = document.createElement('td');
+    const squaredSeed = document.createElement('td');
     const newRand = document.createElement('td');
     consec.textContent = consecutive;
+    actualSeed.textContent = seedReference;
+    let sqrSeed = ''+seedReference*seedReference;
+    let partOne = sqrSeed.substr(0, sqrSeed.indexOf(meanSquare));
+    let partTwo = sqrSeed.substr(sqrSeed.indexOf(meanSquare)+(meanSquare.length));
+    squaredSeed.innerHTML = `<p>${partOne}<strong><u>${meanSquare}</u></strong>${partTwo}</p>`;
     newRand.textContent = newRandom;
     newRow.appendChild(consec);
+    newRow.appendChild(actualSeed);
+    newRow.appendChild(squaredSeed);
     newRow.appendChild(newRand);
     randomList.appendChild(newRow);
 }
