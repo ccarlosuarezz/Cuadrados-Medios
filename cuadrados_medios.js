@@ -2,7 +2,7 @@ const semilla = document.getElementById('input_seed');
 const button = document.getElementById('button');
 const randomList = document.getElementById('random_list');
 const quantity = document.getElementById('quantity');
-const MIN_SEED_LENGTH = 4;
+const MIN_SEED_LENGTH = 3;
 
 button.addEventListener("click", newPseudoRandomList);
 

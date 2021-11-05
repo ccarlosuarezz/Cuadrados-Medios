@@ -28,7 +28,7 @@ body {
 }
 
 .form input {
-    width: 300px;
+    width: 150px;
     height: 100%;
     font-size: 16px;
     color: var(--dark-gray);
@@ -59,22 +59,22 @@ body {
     transition: transform 0.3s ease;
 }
 
-.content_seed {
+.content_input {
     position: absolute;
     bottom: 5px;
     left: 0px;
     transition: all 0.3s ease;
 }
 
-.form input:focus + .label_seed .content_seed,
-.form input:valid + .label_seed .content_seed {
+.form input:focus + .label_input .content_input,
+.form input:valid + .label_input .content_input {
     transform: translateY(-150%);
     font-size: 14px;
     color: var(--green-color);
 }
 
-.form input:focus + .label_seed::after,
-.form input:valid + .label_seed::after {
+.form input:focus + .label_input::after,
+.form input:valid + .label_input::after {
     transform: translateX(0%);
 }
 

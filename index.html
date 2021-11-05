@@ -9,12 +9,18 @@
     <title>Cuadrados Medios</title>
 </head>
 <body>
-    <h1>Cuadrados Medios</h1>
+    <h1>Método de Cuadrados Medios</h1>
     <div class="form_container">
         <div class="form">
             <input type="number" name="seed_value" id="input_seed" autocomplete="off" required/>
-            <label for="seed_value" class="label_seed">
-                <span class="content_seed">Valor semilla</span>
+            <label for="seed_value" class="label_input">
+                <span class="content_input">Valor semilla</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" name="mean_squared_value" id="input_mean_squared" autocomplete="off" required/>
+            <label for="mean_squared_value" class="label_input">
+                <span class="content_input">Cuadrados medios</span>
             </label>
         </div>
         <button id="button" class="generate_button">
