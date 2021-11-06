@@ -10,14 +10,13 @@ button.addEventListener("click", newPseudoRandomList);
 function newPseudoRandomList() {
     let seed = semilla.value;
     let squares = meanSquares.value;
-    const SEED_LENGTH = `${seed}`.length;
-    if (SEED_LENGTH >= MIN_SEED_LENGTH)  {
+    if (seed.length >= MIN_SEED_LENGTH)  {
         if (squares <= `${seed*seed}`.length) {
             randomList.innerHTML = '';
             let seedReference = seed;
             let period_list = [];
             let i = 0;
-            while (`${seedReference*seedReference}`.length >= squares.length) {
+            while (`${seedReference*seedReference}`.length >= squares) {
                 let meanSquares = getMeanSquares(seedReference, squares);
                 if (period_list.length !== 0) {
                     if (period_list.includes(meanSquares)) {
@@ -26,7 +25,7 @@ function newPseudoRandomList() {
                 }
                 if (parseInt(meanSquares) !== 0) {
                     period_list.push(meanSquares);
-                    let newRandom = meanSquares / Math.pow(10, SEED_LENGTH);
+                    let newRandom = meanSquares / Math.pow(10, 4);
                     showNewRandom(i, seedReference, meanSquares, newRandom);
                     seedReference = parseInt(meanSquares);
                     i++;
