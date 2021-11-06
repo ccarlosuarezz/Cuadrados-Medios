@@ -17,7 +17,7 @@ function newPseudoRandomList() {
             let seedReference = seed;
             let period_list = [];
             let i = 0;
-            while (`${seedReference*seedReference}`.length >= SEED_LENGTH) {
+            while (`${seedReference*seedReference}`.length >= squares.length) {
                 let meanSquares = getMeanSquares(seedReference, squares);
                 if (period_list.length !== 0) {
                     if (period_list.includes(meanSquares)) {
