@@ -5,12 +5,12 @@ const randomList = document.getElementById('random_list');
 const quantity = document.getElementById('quantity');
 const MIN_SEED_LENGTH = 2;
 
-button.addEventListener("click", newPseudoRandomList);
+button.addEventListener("click", cuadradosMedios);
 
-function newPseudoRandomList() {
-    let seed = semilla.value;
-    let squares = meanSquares.value;
-    if (seed.length >= MIN_SEED_LENGTH)  {
+function cuadradosMedios() {
+    let seed = Number(semilla.value);
+    let squares = Number(meanSquares.value);
+    if (`${seed}`.length >= MIN_SEED_LENGTH)  {
         if (squares <= `${seed*seed}`.length) {
             randomList.innerHTML = '';
             let seedReference = seed;
@@ -23,11 +23,11 @@ function newPseudoRandomList() {
                         break;
                     }
                 }
-                if (parseInt(meanSquares) !== 0) {
+                if (meanSquares !== 0) {
                     period_list.push(meanSquares);
-                    let newRandom = meanSquares / Math.pow(10, 4);
+                    let newRandom = meanSquares / Math.pow(10, squares);
                     showNewRandom(i, seedReference, meanSquares, newRandom);
-                    seedReference = parseInt(meanSquares);
+                    seedReference = meanSquares;
                     i++;
                 } else {
                     break;
@@ -39,6 +39,21 @@ function newPseudoRandomList() {
         }
     } else {
         window.alert(`El numero ingresado tiene menos de ${MIN_SEED_LENGTH} digitos`);
+    }
+}
+
+function getMeanSquares(seed, squares) {
+    let squaredSeed = seed * seed;
+    let squaredSeedLength = `${squaredSeed}`.length;
+    if (squares<=squaredSeedLength) {
+        if (`${squaredSeed}`.length % 2 != 0) {
+            squaredSeed = '0'+squaredSeed;
+        }
+        squaredSeedLength = `${squaredSeed}`.length;
+        let division = Math.floor(squaredSeedLength/2)-Math.floor(squares/2);
+        return `${squaredSeed}`.substr(division, squares);
+    } else {
+        return 0;
     }
 }
 
@@ -60,19 +75,4 @@ function showNewRandom(consecutive, seedReference, meanSquare, newRandom) {
     newRow.appendChild(squaredSeed);
     newRow.appendChild(newRand);
     randomList.appendChild(newRow);
-}
-
-function getMeanSquares(seed, squares) {
-    let squaredSeed = seed * seed;
-    let squaredSeedLength = `${squaredSeed}`.length;
-    if (squares<=squaredSeedLength) {
-        if (`${squaredSeed}`.length % 2 != 0) {
-            squaredSeed = '0'+squaredSeed;
-        }
-        squaredSeedLength = `${squaredSeed}`.length;
-        let division = Math.floor(squaredSeedLength/2)-Math.floor(squares/2);
-        return `${squaredSeed}`.substr(division, squares);
-    } else {
-        return 0;
-    }
 }
