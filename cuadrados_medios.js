@@ -23,11 +23,11 @@ function cuadradosMedios() {
                         break;
                     }
                 }
-                if (meanSquares !== 0) {
+                if (Number(meanSquares) !== 0) {
                     period_list.push(meanSquares);
                     let newRandom = meanSquares / Math.pow(10, squares);
                     showNewRandom(i, seedReference, meanSquares, newRandom);
-                    seedReference = meanSquares;
+                    seedReference = Number(meanSquares);
                     i++;
                 } else {
                     break;
